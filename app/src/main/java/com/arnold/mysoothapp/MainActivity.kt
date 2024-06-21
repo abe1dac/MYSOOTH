@@ -99,9 +99,16 @@ fun AlignYourBodyElement(
                 .clip(CircleShape)
        )
         Text(
-            text = "Dancing hall",
+            text = "Dancing hall for new members",
             modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp),
             style = MaterialTheme.typography.bodyMedium
         )
     }
+}
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
 }
