@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -39,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.*
 
 class MainActivity : ComponentActivity() {
@@ -64,6 +67,13 @@ fun MyLevel(modifier: Modifier = Modifier) {
         SearchBar()
         Spacer(modifier = Modifier.height(20.dp))
         MyApp()
+        Spacer(modifier = Modifier.height(20.dp))
+        AlignYourBodyElement(drawable = R.drawable.mms,
+            modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        FavoriteCollectionCard(drawable = R.drawable.mms1,
+            text = R.string.nature_meditation,
+            modifier = Modifier.padding(8.dp))
     }
 
 
@@ -88,7 +98,7 @@ fun SearchBar(
         ),
         placeholder = {
             Row {
-                Text(text = "Search ")
+                Text(stringResource(R.string.PlaceHOlder_search))
             }
         },
         modifier = modifier
@@ -133,6 +143,40 @@ fun MyApp(
         }
     }
 }
+@Composable
+fun FavoriteCollectionCard(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.width(255.dp)
+        ) {
+            Image(
+                painter = painterResource(drawable),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(80.dp)
+            )
+            Column {
+                Text(
+                    text = stringResource(text),
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Text(text = "Welcome to meditation")
+            }
+            
+        }
+    }
+}
+
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     val expanded = remember { mutableStateOf(false) }

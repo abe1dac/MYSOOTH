@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MySoothApp</string>
+    <string name="PlaceHOlder_search">Search here  </string>
+    <string name="nature_meditation">Nature Meditation  </string>
 </resources>
