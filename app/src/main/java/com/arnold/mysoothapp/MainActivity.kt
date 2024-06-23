@@ -8,7 +8,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.*
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +21,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -68,16 +72,51 @@ fun MyLevel(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(20.dp))
         MyApp()
         Spacer(modifier = Modifier.height(20.dp))
-        AlignYourBodyElement(drawable = R.drawable.mms,
+        AlignYourBodyElement(drawable = R.drawable.mms, text = R.string.Inversion,
             modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        AlignYourBodyRow()
         Spacer(modifier = Modifier.height(20.dp))
         FavoriteCollectionCard(drawable = R.drawable.mms1,
             text = R.string.nature_meditation,
             modifier = Modifier.padding(8.dp))
+
     }
 
 
 }
+
+
+@Composable
+fun AlignYourBodyRow(
+    modifier: Modifier = Modifier
+) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        modifier = modifier
+    ) {
+        items(alignYourBodyData) { item ->
+            AlignYourBodyElement(item.drawable, item.text)
+        }
+    }
+}
+// Define data class
+data class AlignYourBodyItem(
+    @DrawableRes val drawable: Int,
+    @StringRes val text: Int
+)
+
+// Sample data
+val alignYourBodyData = listOf(
+    AlignYourBodyItem(R.drawable.mms, R.string.Inversion),
+    AlignYourBodyItem(R.drawable.mm2, R.string.Inversion),
+    AlignYourBodyItem(R.drawable.mm4, R.string.nature_meditation),
+    AlignYourBodyItem(R.drawable.mms, R.string.Inversion),
+    AlignYourBodyItem(R.drawable.mm2, R.string.Inversion),
+    AlignYourBodyItem(R.drawable.mm4, R.string.nature_meditation)
+    // Add more items as needed
+)
 
 @Composable
 fun SearchBar(
@@ -107,31 +146,32 @@ fun SearchBar(
 
     )
 }
+
 @Composable
 fun AlignYourBodyElement(
     @DrawableRes drawable: Int,
+    @StringRes text: Int,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-       Image(
+        Image(
             painter = painterResource(drawable),
             contentDescription = null,
-           contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(88.dp)
                 .clip(CircleShape)
-       )
+        )
         Text(
-            text = "Dancing hall for new members",
+            text = stringResource(text),
             modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp),
             style = MaterialTheme.typography.bodyMedium
         )
     }
 }
-
 @Composable
 fun MyApp(
     modifier: Modifier = Modifier,
