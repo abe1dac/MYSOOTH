@@ -22,6 +22,9 @@ import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -80,6 +83,8 @@ fun MyLevel(modifier: Modifier = Modifier) {
         FavoriteCollectionCard(drawable = R.drawable.mms1,
             text = R.string.nature_meditation,
             modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        FavoriteCollectionsGrid()
 
     }
 
@@ -216,6 +221,41 @@ fun FavoriteCollectionCard(
         }
     }
 }
+@Composable
+fun FavoriteCollectionsGrid(
+    modifier: Modifier = Modifier
+) {
+    LazyHorizontalGrid(
+        rows = GridCells.Fixed(2),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier.height(168.dp)
+    ) {
+        /*items(favoriteCollectionsData) { item ->
+            FavoriteCollectionCard(item.drawable, item.text, Modifier.height(80.dp))*/
+        items(favoriteCollectionsData){ item ->
+            FavoriteCollectionCard(item.drawable, item.text, Modifier.height(80.dp))
+        }
+    }
+}
+// Data class definition
+data class FavoriteCollectionItem(
+    @DrawableRes val drawable: Int,
+    @StringRes val text: Int
+)
+
+// Sample data
+val favoriteCollectionsData = listOf(
+    FavoriteCollectionItem(R.drawable.mms1, R.string.nature_meditation),
+    FavoriteCollectionItem(R.drawable.mn3, R.string.nature_meditation2),
+    FavoriteCollectionItem(R.drawable.mns2, R.string.nature_meditation3),
+    FavoriteCollectionItem(R.drawable.mms1, R.string.nature_meditation),
+    FavoriteCollectionItem(R.drawable.mn3, R.string.nature_meditation2),
+    FavoriteCollectionItem(R.drawable.mns2, R.string.nature_meditation3),
+    FavoriteCollectionItem(R.drawable.mms1, R.string.nature_meditation)
+
+)
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
