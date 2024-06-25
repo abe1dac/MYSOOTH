@@ -78,13 +78,18 @@ fun MyLevel(modifier: Modifier = Modifier) {
         AlignYourBodyElement(drawable = R.drawable.mms, text = R.string.Inversion,
             modifier = Modifier.padding(8.dp))
         Spacer(modifier = Modifier.height(20.dp))
-        AlignYourBodyRow()
+        HomeSection(title = R.string.Align_your_body) {
+            AlignYourBodyRow()
+        }
         Spacer(modifier = Modifier.height(20.dp))
         FavoriteCollectionCard(drawable = R.drawable.mms1,
             text = R.string.nature_meditation,
             modifier = Modifier.padding(8.dp))
         Spacer(modifier = Modifier.height(20.dp))
-        FavoriteCollectionsGrid()
+        HomeSection(title = R.string.Favourite) {
+            FavoriteCollectionsGrid()
+        }
+
 
     }
 
@@ -151,6 +156,24 @@ fun SearchBar(
 
     )
 }
+@Composable
+fun HomeSection(
+    @StringRes title: Int,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(modifier) {
+        Text(
+            text = stringResource(title),
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .paddingFromBaseline(top = 40.dp, bottom = 16.dp)
+                .padding(horizontal = 16.dp)
+        )
+        content()
+    }
+}
+
 
 @Composable
 fun AlignYourBodyElement(
