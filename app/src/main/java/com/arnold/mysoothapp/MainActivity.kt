@@ -26,7 +26,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -70,7 +72,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyLevel(modifier: Modifier = Modifier) {
-    Column {
+    Column (
+        modifier
+            .verticalScroll(rememberScrollState())
+    ){
+        Spacer(Modifier.height(16.dp))
         SearchBar()
         Spacer(modifier = Modifier.height(20.dp))
         MyApp()
@@ -89,7 +95,7 @@ fun MyLevel(modifier: Modifier = Modifier) {
         HomeSection(title = R.string.Favourite) {
             FavoriteCollectionsGrid()
         }
-
+        Spacer(Modifier.height(16.dp))
 
     }
 
