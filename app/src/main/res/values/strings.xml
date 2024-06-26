@@ -7,4 +7,6 @@
     <string name="nature_meditation3">Dark blue leaves  </string>
     <string name="Align_your_body">Align Your Body </string>
     <string name="Favourite">Favourite Collection </string>
+    <string name="bottom_navigation_home">Home </string>
+    <string name="bottom_navigation_profile">Profile </string>
 </resources>

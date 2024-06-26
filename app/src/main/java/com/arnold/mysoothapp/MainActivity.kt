@@ -30,6 +30,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -59,12 +61,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MySoothAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize(),) { innerPadding ->
 
                    // SearchBar(modifier = Modifier.padding(innerPadding))
                    // MyApp()
                     MyLevel(modifier = Modifier.padding(innerPadding))
                 }
+                Scaffold(
+                    bottomBar = { SootheBottomNavigation() }
+                ) { padding ->
+                    (Modifier.padding(padding))
             }
         }
     }
@@ -285,6 +291,43 @@ val favoriteCollectionsData = listOf(
     FavoriteCollectionItem(R.drawable.mms1, R.string.nature_meditation)
 
 )
+
+
+@Composable
+private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+    ) {
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_home))
+            },
+            selected = true,
+            onClick = {}
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_profile))
+            },
+            selected = false,
+            onClick = {}
+        )
+    }
+}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
